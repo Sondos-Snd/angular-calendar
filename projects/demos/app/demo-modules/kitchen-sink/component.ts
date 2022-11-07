@@ -105,12 +105,14 @@ export class DemoComponent {
         afterEnd: true,
       },
       draggable: true,
+      resource: 'Ress 1',
     },
     {
       start: startOfDay(new Date()),
       title: 'An event with no end date',
       color: { ...colors.yellow },
       actions: this.actions,
+      resource: 'Ress 2',
     },
     {
       start: subDays(endOfMonth(new Date()), 3),
@@ -118,6 +120,7 @@ export class DemoComponent {
       title: 'A long event that spans 2 months',
       color: { ...colors.blue },
       allDay: true,
+      resource: 'Ress 3',
     },
     {
       start: addHours(startOfDay(new Date()), 2),
@@ -130,6 +133,7 @@ export class DemoComponent {
         afterEnd: true,
       },
       draggable: true,
+      resource: 'Ress 4',
     },
   ];
 

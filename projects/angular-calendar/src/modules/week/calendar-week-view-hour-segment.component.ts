@@ -1,5 +1,5 @@
 import { Component, Input, TemplateRef } from '@angular/core';
-import { WeekViewHourSegment } from 'calendar-utils';
+import { CalendarEvent, WeekViewHourSegment } from 'calendar-utils';
 
 @Component({
   selector: 'mwl-calendar-week-view-hour-segment',
@@ -12,14 +12,8 @@ import { WeekViewHourSegment } from 'calendar-utils';
       let-isTimeLabel="isTimeLabel"
       let-daysInWeek="daysInWeek"
     >
-      <div
-        class="cal-hour-segment"
-        [style.height.px]="segmentHeight"
-        [class.cal-hour-start]="segment.isStart"
-        [class.cal-after-hour-start]="!segment.isStart"
-        [ngClass]="segment.cssClass"
-      >
-        <div class="cal-time" *ngIf="isTimeLabel">Resource</div>
+      <div class="cal-hour-segment">
+        <div class="cal-time" *ngIf="isTimeLabel">{{ segment.resource }}</div>
       </div>
     </ng-template>
 
@@ -37,7 +31,7 @@ import { WeekViewHourSegment } from 'calendar-utils';
   `,
 })
 export class CalendarWeekViewHourSegmentComponent {
-  @Input() segment: any;
+  @Input() segment: CalendarEvent;
 
   @Input() segmentHeight: number;
 

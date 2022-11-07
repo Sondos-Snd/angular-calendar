@@ -229,7 +229,7 @@ export interface CalendarWeekViewBeforeRenderEvent extends WeekView {
             [class.cal-hour-odd]="odd"
           >
             <mwl-calendar-week-view-hour-segment
-              *ngFor="let segment of hour.segments"
+              *ngFor="let segment of events"
               [style.height.px]="hourSegmentHeight"
               [segment]="segment"
               [segmentHeight]="hourSegmentHeight"
@@ -378,24 +378,7 @@ export interface CalendarWeekViewBeforeRenderEvent extends WeekView {
               "
               class="cal-hour"
               [class.cal-hour-odd]="odd"
-            >
-              <mwl-calendar-week-view-hour-segment
-                *ngFor="let segment of hour.segments"
-                [style.height.px]="hourSegmentHeight"
-                [segment]="segment"
-                [segmentHeight]="hourSegmentHeight"
-                [locale]="locale"
-                [customTemplate]="hourSegmentTemplate"
-                [daysInWeek]="daysInWeek"
-                mwlDroppable
-                [dragOverClass]="
-                  !dragActive || !snapDraggedEvents ? 'cal-drag-over' : null
-                "
-                dragActiveClass="cal-drag-active"
-                [isTimeLabel]="daysInWeek === 1"
-              >
-              </mwl-calendar-week-view-hour-segment>
-            </div>
+            ></div>
           </div>
         </div>
       </div>

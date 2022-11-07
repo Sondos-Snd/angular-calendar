@@ -176,6 +176,7 @@
     "angular-draggable-droppable": "^7.0.0",
     "angular-resizable-element": "^6.0.0",
     "calendar-utils": "^0.10.1",
+    "pnpm": "^7.14.2",
     "positioning": "^2.0.1",
     "tslib": "^2.4.0"
   },

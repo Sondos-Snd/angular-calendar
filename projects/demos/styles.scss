@@ -8,4 +8,14 @@
   body {
     overflow-y: hidden;
   }
+
+  .formkit-slide-in {
+    max-width: 350px !important;
+    z-index: 1 !important;
+  }
+
+  .formkit-slide-in .formkit-close {
+    z-index: 3;
+    top: 0 !important;
+  }
 }

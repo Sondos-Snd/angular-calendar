@@ -42,8 +42,7 @@ import { trackByWeekDayHeaderDate } from '../common/util';
           tabindex="0"
           role="columnheader"
         >
-          <b>{{ day.date | calendarDate: 'weekViewColumnHeader':locale }}</b
-          ><br />
+          <b>hour</b><br />
           <span>{{
             day.date | calendarDate: 'weekViewColumnSubHeader':locale
           }}</span>

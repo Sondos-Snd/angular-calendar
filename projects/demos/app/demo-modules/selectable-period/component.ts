@@ -86,7 +86,7 @@ export class DemoComponent {
           delete segment.cssClass;
           if (
             this.selectedDayViewDate &&
-            segment.date.getTime() === this.selectedDayViewDate.getTime()
+            segment.start.getTime() === this.selectedDayViewDate.getTime()
           ) {
             segment.cssClass = 'cal-day-selected';
           }

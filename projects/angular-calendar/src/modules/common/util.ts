@@ -58,7 +58,7 @@ export const trackByHourSegment = (
 ) => segment.date.toISOString();
 
 export const trackByHour = (index: number, hour: WeekViewHour) =>
-  hour.segments[0].date.toISOString();
+  hour.segments[0];
 
 export const trackByWeekAllDayEvent = (
   index: number,

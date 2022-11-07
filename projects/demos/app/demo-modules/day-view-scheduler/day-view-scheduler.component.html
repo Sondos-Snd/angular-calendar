@@ -106,7 +106,7 @@
         [class.cal-hour-odd]="odd"
       >
         <mwl-calendar-week-view-hour-segment
-          *ngFor="let segment of hour.segments; trackBy: trackByHourSegment"
+          *ngFor="let segment of hour.segments"
           [style.height.px]="hourSegmentHeight"
           [segment]="segment"
           [segmentHeight]="hourSegmentHeight"
@@ -230,30 +230,7 @@
           *ngFor="let hour of column.hours; trackBy: trackByHour; let odd = odd"
           class="cal-hour"
           [class.cal-hour-odd]="odd"
-        >
-          <mwl-calendar-week-view-hour-segment
-            *ngFor="let segment of hour.segments; trackBy: trackByHourSegment"
-            [style.height.px]="hourSegmentHeight"
-            [segment]="segment"
-            [segmentHeight]="hourSegmentHeight"
-            [locale]="locale"
-            [customTemplate]="hourSegmentTemplate"
-            (mwlClick)="
-              hourSegmentClicked.emit({
-                date: segment.date,
-                sourceEvent: $event
-              })
-            "
-            [clickListenerDisabled]="hourSegmentClicked.observers.length === 0"
-            mwlDroppable
-            [dragOverClass]="
-              !dragActive || !snapDraggedEvents ? 'cal-drag-over' : null
-            "
-            dragActiveClass="cal-drag-active"
-            (drop)="eventDropped($event, segment.date, false)"
-          >
-          </mwl-calendar-week-view-hour-segment>
-        </div>
+        ></div>
       </div>
     </div>
   </div>

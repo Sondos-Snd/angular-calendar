@@ -46,13 +46,7 @@ export class DemoComponent {
     renderEvent.hourColumns.forEach((hourColumn) => {
       hourColumn.hours.forEach((hour) => {
         hour.segments.forEach((segment) => {
-          if (
-            segment.date.getHours() >= 2 &&
-            segment.date.getHours() <= 5 &&
-            segment.date.getDay() === 2
-          ) {
-            segment.cssClass = 'bg-pink';
-          }
+          segment.cssClass = 'bg-pink';
         });
       });
     });
@@ -62,9 +56,7 @@ export class DemoComponent {
     renderEvent.hourColumns.forEach((hourColumn) => {
       hourColumn.hours.forEach((hour) => {
         hour.segments.forEach((segment) => {
-          if (segment.date.getHours() >= 2 && segment.date.getHours() <= 5) {
-            segment.cssClass = 'bg-pink';
-          }
+          segment.cssClass = 'bg-pink';
         });
       });
     });

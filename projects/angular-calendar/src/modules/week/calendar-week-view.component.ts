@@ -229,7 +229,7 @@ export interface CalendarWeekViewBeforeRenderEvent extends WeekView {
             [class.cal-hour-odd]="odd"
           >
             <mwl-calendar-week-view-hour-segment
-              *ngFor="let segment of hour.segments; trackBy: trackByHourSegment"
+              *ngFor="let segment of hour.segments"
               [style.height.px]="hourSegmentHeight"
               [segment]="segment"
               [segmentHeight]="hourSegmentHeight"
@@ -380,32 +380,18 @@ export interface CalendarWeekViewBeforeRenderEvent extends WeekView {
               [class.cal-hour-odd]="odd"
             >
               <mwl-calendar-week-view-hour-segment
-                *ngFor="
-                  let segment of hour.segments;
-                  trackBy: trackByHourSegment
-                "
+                *ngFor="let segment of hour.segments"
                 [style.height.px]="hourSegmentHeight"
                 [segment]="segment"
                 [segmentHeight]="hourSegmentHeight"
                 [locale]="locale"
                 [customTemplate]="hourSegmentTemplate"
                 [daysInWeek]="daysInWeek"
-                (mwlClick)="
-                  hourSegmentClicked.emit({
-                    date: segment.date,
-                    sourceEvent: $event
-                  })
-                "
-                [clickListenerDisabled]="
-                  hourSegmentClicked.observers.length === 0
-                "
                 mwlDroppable
                 [dragOverClass]="
                   !dragActive || !snapDraggedEvents ? 'cal-drag-over' : null
                 "
                 dragActiveClass="cal-drag-active"
-                (drop)="eventDropped($event, segment.date, false)"
-                (dragEnter)="dateDragEnter(segment.date)"
                 [isTimeLabel]="daysInWeek === 1"
               >
               </mwl-calendar-week-view-hour-segment>
@@ -521,7 +507,7 @@ export class CalendarWeekViewComponent
   /**
    * The number of segments in an hour. Must divide equally into 60.
    */
-  @Input() hourSegments: number = 2;
+  @Input() hourSegments: number = 1;
 
   /**
    * The duration of each segment group in minutes
@@ -750,7 +736,7 @@ export class CalendarWeekViewComponent
    * @hidden
    */
   trackByHourColumn = (index: number, column: WeekViewHourColumn) =>
-    column.hours[0] ? column.hours[0].segments[0].date.toISOString() : column;
+    column.hours[0] ? column.hours[0].segments : column;
 
   /**
    * @hidden

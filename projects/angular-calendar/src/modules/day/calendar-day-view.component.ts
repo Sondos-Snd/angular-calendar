@@ -77,7 +77,7 @@ export class CalendarDayViewComponent {
   /**
    * The number of segments in an hour. Must divide equally into 60.
    */
-  @Input() hourSegments: number = 2;
+  @Input() hourSegments: number = 1;
 
   /**
    * The height in pixels of each hour segment

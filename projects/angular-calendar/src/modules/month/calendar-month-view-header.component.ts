@@ -35,7 +35,7 @@ import { trackByWeekDayHeaderDate } from '../common/util';
           tabindex="0"
           role="columnheader"
         >
-          {{ day.date | calendarDate: 'monthViewColumnHeader':locale }}
+          {{ day.date | calendarDate: 'monthViewColumnHeader':'fr' }}
         </div>
       </div>
     </ng-template>
@@ -43,7 +43,7 @@ import { trackByWeekDayHeaderDate } from '../common/util';
       [ngTemplateOutlet]="customTemplate || defaultTemplate"
       [ngTemplateOutletContext]="{
         days: days,
-        locale: locale,
+        locale: 'fr',
         trackByWeekDayHeaderDate: trackByWeekDayHeaderDate
       }"
     >
@@ -53,7 +53,7 @@ import { trackByWeekDayHeaderDate } from '../common/util';
 export class CalendarMonthViewHeaderComponent {
   @Input() days: WeekDay[];
 
-  @Input() locale: string;
+  @Input() locale: string = 'fr';
 
   @Input() customTemplate: TemplateRef<any>;
 

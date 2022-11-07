@@ -743,7 +743,7 @@ export class CalendarWeekViewComponent
     protected dateAdapter: DateAdapter,
     protected element: ElementRef<HTMLElement>
   ) {
-    this.locale = locale;
+    this.locale = 'fr';
   }
 
   /**

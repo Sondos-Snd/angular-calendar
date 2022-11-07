@@ -30,7 +30,7 @@ import { PlacementArray } from 'positioning';
       <div
         class="cal-cell-top"
         [attr.aria-label]="
-          { day: day, locale: locale } | calendarA11y: 'monthCell'
+          { day: day, locale: 'fr' } | calendarA11y: 'monthCell'
         "
       >
         <span aria-hidden="true">
@@ -38,7 +38,7 @@ import { PlacementArray } from 'positioning';
             day.badgeTotal
           }}</span>
           <span class="cal-day-number">{{
-            day.date | calendarDate: 'monthViewDayNumber':locale
+            day.date | calendarDate: 'monthViewDayNumber':'fr'
           }}</span>
         </span>
       </div>
@@ -75,7 +75,7 @@ import { PlacementArray } from 'positioning';
       [ngTemplateOutletContext]="{
         day: day,
         openDay: openDay,
-        locale: locale,
+        locale: 'fr',
         tooltipPlacement: tooltipPlacement,
         highlightDay: highlightDay,
         unhighlightDay: unhighlightDay,
@@ -108,7 +108,7 @@ export class CalendarMonthCellComponent {
 
   @Input() openDay: MonthViewDay;
 
-  @Input() locale: string;
+  @Input() locale: string = 'fr';
 
   @Input() tooltipPlacement: PlacementArray;
 

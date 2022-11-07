@@ -8,14 +8,14 @@
         [(viewDate)]="viewDate"
         (viewDateChange)="closeOpenMonthViewDay()"
       >
-        Previous
+        Précédent
       </div>
       <div
         class="btn btn-outline-secondary"
         mwlCalendarToday
         [(viewDate)]="viewDate"
       >
-        Today
+        Aujourd'hui
       </div>
       <div
         class="btn btn-primary"
@@ -24,35 +24,35 @@
         [(viewDate)]="viewDate"
         (viewDateChange)="closeOpenMonthViewDay()"
       >
-        Next
+        Suivant
       </div>
     </div>
   </div>
   <div class="col-md-4">
-    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'fr' }}</h3>
   </div>
   <div class="col-md-4">
     <div class="btn-group">
       <div
         class="btn btn-primary"
-        (click)="setView(CalendarView.Month)"
-        [class.active]="view === CalendarView.Month"
+        (click)="setView(CalendarView.Day)"
+        [class.active]="view === CalendarView.Day"
       >
-        Month
+        Jour
       </div>
       <div
         class="btn btn-primary"
         (click)="setView(CalendarView.Week)"
         [class.active]="view === CalendarView.Week"
       >
-        Week
+        Semaine
       </div>
       <div
         class="btn btn-primary"
-        (click)="setView(CalendarView.Day)"
-        [class.active]="view === CalendarView.Day"
+        (click)="setView(CalendarView.Month)"
+        [class.active]="view === CalendarView.Month"
       >
-        Day
+        Mois
       </div>
     </div>
   </div>
@@ -95,9 +95,9 @@
 <br /><br /><br />
 
 <h3>
-  Edit events
+  Modifier événements
   <button class="btn btn-primary float-end" (click)="addEvent()">
-    Add new
+    Ajouter nv
   </button>
   <div class="clearfix"></div>
 </h3>
@@ -106,12 +106,12 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Primary color</th>
-        <th>Secondary + text color</th>
-        <th>Starts at</th>
-        <th>Ends at</th>
-        <th>Remove</th>
+        <th>Titre</th>
+        <th>Couleur</th>
+        <th>Secondaire</th>
+        <th>Début</th>
+        <th>Fin at</th>
+        <th>Supprimer</th>
       </tr>
     </thead>
 
@@ -187,7 +187,7 @@
 
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
-    <h5 class="modal-title">Event action occurred</h5>
+    <h5 class="modal-title">Action événement</h5>
     <button type="button" class="close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -198,7 +198,7 @@
       <pre>{{ modalData?.action }}</pre>
     </div>
     <div>
-      Event:
+      Evénement:
       <pre>{{ modalData?.event | json }}</pre>
     </div>
   </div>

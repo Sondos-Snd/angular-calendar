@@ -19,7 +19,7 @@ import { CustomDateFormatter } from './custom-date-formatter.provider';
   ],
 })
 export class DemoComponent {
-  view: CalendarView = CalendarView.Month;
+  view: CalendarView = CalendarView.Day;
 
   viewDate = new Date();
 

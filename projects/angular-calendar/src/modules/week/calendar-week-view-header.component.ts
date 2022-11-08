@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   TemplateRef,
+  OnInit,
 } from '@angular/core';
 import { CalendarEvent, WeekDay } from 'calendar-utils';
 import { trackByWeekDayHeaderDate } from '../common/util';
@@ -23,29 +24,21 @@ import { trackByWeekDayHeaderDate } from '../common/util';
       <div class="cal-day-headers" role="row">
         <div
           class="cal-header"
-          *ngFor="let day of days; trackBy: trackByWeekDayHeaderDate"
-          [class.cal-past]="day.isPast"
-          [class.cal-today]="day.isToday"
-          [class.cal-future]="day.isFuture"
-          [class.cal-weekend]="day.isWeekend"
-          [ngClass]="day.cssClass"
-          (mwlClick)="dayHeaderClicked.emit({ day: day, sourceEvent: $event })"
+          *ngFor="let hour of hourColumn; trackBy: trackByWeekDayHeaderDate"
+          (mwlClick)="dayHeaderClicked.emit({ day: hour, sourceEvent: $event })"
           mwlDroppable
           dragOverClass="cal-drag-over"
           (drop)="
             eventDropped.emit({
               event: $event.dropData.event,
-              newStart: day.date
+              newStart: hour.date
             })
           "
-          (dragEnter)="dragEnter.emit({ date: day.date })"
+          (dragEnter)="dragEnter.emit({ date: hour.date })"
           tabindex="0"
           role="columnheader"
         >
-          <b>hour</b><br />
-          <span>{{
-            day.date | calendarDate: 'weekViewColumnSubHeader':locale
-          }}</span>
+          <b>{{ hour.day }}</b>
         </div>
       </div>
     </ng-template>
@@ -63,8 +56,10 @@ import { trackByWeekDayHeaderDate } from '../common/util';
     </ng-template>
   `,
 })
-export class CalendarWeekViewHeaderComponent {
-  @Input() days: WeekDay[];
+export class CalendarWeekViewHeaderComponent implements OnInit {
+  @Input() days: any[];
+
+  hourColumn: WeekDay[];
 
   @Input() locale: string;
 
@@ -83,4 +78,16 @@ export class CalendarWeekViewHeaderComponent {
   @Output() dragEnter = new EventEmitter<{ date: Date }>();
 
   trackByWeekDayHeaderDate = trackByWeekDayHeaderDate;
+
+  ngOnInit(): void {
+    this.hourColumn = [
+      { date: this.days[0].date, day: '08:00' },
+      { date: this.days[0].date, day: '09:00' },
+      { date: this.days[0].date, day: '10:00' },
+      { date: this.days[0].date, day: '11:00' },
+      { date: this.days[0].date, day: '12:00' },
+      { date: this.days[0].date, day: '13:00' },
+      { date: this.days[0].date, day: '14:00' },
+    ];
+  }
 }

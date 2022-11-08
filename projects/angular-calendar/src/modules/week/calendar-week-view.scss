@@ -22,7 +22,7 @@ $cal-week-view-vars: map.merge($cal-vars, $cal-week-view-vars);
 
         [dir='rtl'] & {
           border-right-color: initial;
-          border-left: solid 1px map.get($theme, border-color) !important;
+          border-left: solid 5px map.get($theme, border-color) !important;
         }
       }
 

@@ -115,16 +115,7 @@ export class DemoComponent {
       resource: 'Ress 2',
     },
     {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: { ...colors.blue },
-      allDay: true,
-      resource: 'Ress 3',
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
+      start: addHours(startOfDay(new Date()), 1),
       title: 'A draggable and resizable event',
       color: { ...colors.yellow },
       actions: this.actions,
@@ -134,6 +125,14 @@ export class DemoComponent {
       },
       draggable: true,
       resource: 'Ress 4',
+    },
+    {
+      start: subDays(endOfMonth(new Date()), 3),
+      end: addDays(endOfMonth(new Date()), 3),
+      title: 'A long event that spans 2 months',
+      color: { ...colors.blue },
+      allDay: true,
+      resource: 'Ress 3',
     },
   ];
 

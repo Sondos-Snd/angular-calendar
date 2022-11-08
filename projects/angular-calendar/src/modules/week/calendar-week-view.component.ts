@@ -84,6 +84,7 @@ export interface CalendarWeekViewBeforeRenderEvent extends WeekView {
     <div class="cal-week-view" role="grid">
       <mwl-calendar-week-view-header
         [days]="days"
+        [hourColumn]="hourColumn"
         [locale]="locale"
         [customTemplate]="headerTemplate"
       >
@@ -461,6 +462,8 @@ export class CalendarWeekViewComponent
    * @hidden
    */
   days: WeekDay[];
+
+  hourColumn: WeekDay[];
 
   /**
    * @hidden

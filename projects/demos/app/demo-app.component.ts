@@ -3,7 +3,6 @@ import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { map, take, filter } from 'rxjs/operators';
 import StackBlitzSDK from '@stackblitz/sdk';
 import { Angulartics2GoogleGlobalSiteTag } from 'angulartics2';
-import { sources as demoUtilsSources } from './demo-modules/demo-utils/sources';
 import { Subject } from 'rxjs';
 import { NgbNav } from '@ng-bootstrap/ng-bootstrap/nav/nav';
 
@@ -202,10 +201,6 @@ platformBrowserDynamic().bootstrapModule(BootstrapModule).then(ref => {
 }).catch(err => console.error(err));
 `.trim(),
     };
-
-    demoUtilsSources.forEach((source) => {
-      files[`demo-utils/${source.filename}`] = source.contents.raw.default;
-    });
 
     demo.sources.forEach((source) => {
       files[`demo/${source.filename}`] = source.contents.raw;

@@ -59,7 +59,7 @@ import { trackByWeekDayHeaderDate } from '../common/util';
 export class CalendarWeekViewHeaderComponent implements OnInit {
   @Input() days: any[];
 
-  hourColumn: WeekDay[];
+  @Input() hourColumn: WeekDay[];
 
   @Input() locale: string;
 
@@ -88,6 +88,11 @@ export class CalendarWeekViewHeaderComponent implements OnInit {
       { date: this.days[0].date, day: '12:00' },
       { date: this.days[0].date, day: '13:00' },
       { date: this.days[0].date, day: '14:00' },
+      { date: this.days[0].date, day: '15:00' },
+      { date: this.days[0].date, day: '16:00' },
+      { date: this.days[0].date, day: '17:00' },
+      { date: this.days[0].date, day: '18:00' },
+      { date: this.days[0].date, day: '19:00' },
     ];
   }
 }

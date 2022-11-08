@@ -1,3 +1,11 @@
+<style>
+
+.datepicker{
+  border-color:#e1e1e1 !important;   
+}
+
+</style>
+
 <div class="row text-center">
   <div class="col-md-4">
     <div class="btn-group">
@@ -26,8 +34,12 @@
       >
         Suivant
       </div>
+      
     </div>
+    <input type="date" class="btn m-1 datepicker">
   </div>
+  
+  
   <div class="col-md-4">
     <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'fr' }}</h3>
   </div>

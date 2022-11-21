@@ -1,4 +1,1 @@
-<<<<<<< HEAD
-=======
-![image](https://user-images.githubusercontent.com/52915601/200524150-50824541-1ef5-4a8f-ac85-8cbdf70e90eb.png)
->>>>>>> ade385b199c202b500b33c53b57d59ab4ed49022
+<img width="1785" alt="image" src="https://user-images.githubusercontent.com/52915601/202967895-bdce3b2e-9f43-483a-a85d-59b8bec25aa5.png">

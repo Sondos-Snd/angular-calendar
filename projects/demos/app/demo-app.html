@@ -17,14 +17,6 @@
   </div>
 </nav>
 
-<ng-template #loading>
-  <div class="card">
-    <div class="card-body text-center">
-      <i class="fas fa-spin fa-spinner fa-5x"></i> <br />
-      Chargement...
-    </div>
-  </div>
-</ng-template>
 
 <div class="container-fluid main-content">
   <div class="row fill-height">
@@ -32,7 +24,7 @@
       class="col fill-height scroll-y demo-container"
       mwlDraggableScrollContainer
     >
-      <div class="card" *ngIf="firstDemoLoaded; else loading">
+      <div class="card">
         <div class="card-body">
           <div class="spacer-top all-app"><router-outlet></router-outlet></div>
           <div [ngbNavOutlet]="nav"></div>

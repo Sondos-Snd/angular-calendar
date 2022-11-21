@@ -1,4 +1,6 @@
 import { NgModule, ModuleWithProviders, Provider } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import {
   CalendarCommonModule,
   CalendarModuleConfig,
@@ -16,27 +18,15 @@ export * from './month/calendar-month.module';
 export * from './week/calendar-week.module';
 export * from './day/calendar-day.module';
 
-/**
- * The main module of this library. Example usage:
- *
- * ```typescript
- * import { CalenderModule } from 'angular-calendar';
- *
- * @NgModule({
- *   imports: [
- *     CalenderModule.forRoot()
- *   ]
- * })
- * class MyModule {}
- * ```
- *
- */
+
 @NgModule({
   imports: [
+    FormsModule,
     CalendarCommonModule,
     CalendarMonthModule,
     CalendarWeekModule,
     CalendarDayModule,
+    
   ],
   exports: [
     CalendarCommonModule,

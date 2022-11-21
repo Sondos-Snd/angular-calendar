@@ -10,6 +10,8 @@ h3 {
   padding-bottom: 15px;
 }
 
+
+
 .sidebar-nav {
   width: 355px;
 }
@@ -83,4 +85,9 @@ pre {
   position: absolute;
   top: 15px;
   right: 15px;
+}
+
+
+.btn{
+  zoom:60%
 }

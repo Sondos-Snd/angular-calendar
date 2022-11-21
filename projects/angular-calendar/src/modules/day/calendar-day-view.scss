@@ -1,29 +1,27 @@
-.cal-day-view {
-  /* stylelint-disable-next-line selector-type-no-unknown */
-  mwl-calendar-week-view-header {
-    display: none;
-  }
 
-  .cal-events-container {
-    margin-left: 70px;
+.resourceClass{
+  display: text-center;
+  font-size: 10px;
+}
+.timeScale {
+  grid-column-start: 1;
+  grid-column-end: 45;
+}
+.grid-container {
+  display: grid;
+  width:100%;
+  grid-template-areas: repeat(auto-fit,45);   
+  background-color: #ffffff;
+  padding: 0px;
+}
 
-    [dir='rtl'] & {
-      margin-left: initial;
-      margin-right: 70px;
-    }
-  }
-
-  .cal-day-column {
-    border-left: 0;
-  }
-
-  .cal-current-time-marker {
-    margin-left: 70px;
-    width: calc(100% - 70px);
-
-    [dir='rtl'] & {
-      margin-left: initial;
-      margin-right: 70px;
-    }
-  }
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 10px;
+    
+}
+.timed {
+  padding-right: 0px;
+padding-left: 0px;
 }

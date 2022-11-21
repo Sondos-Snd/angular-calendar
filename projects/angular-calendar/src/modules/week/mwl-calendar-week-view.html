@@ -1,0 +1,55 @@
+
+<hr>
+<div class="table-responsive">
+    <span class="badge" style="background-color: #6c757d;cursor:pointer" (click)="filterType('Tous')">Tous</span>
+    <span class="badge" style="background-color: rgb(232, 180, 69);cursor:pointer" (click)="filterType('Type 1')">Type
+        1</span>
+    <span class="badge" style="background-color: rgb(218, 111, 30);cursor:pointer" (click)="filterType('Type 2')">Type
+        2</span>
+    <span class="badge " style="background-color: rgb(215, 76, 209);cursor:pointer" (click)="filterType('Type 3')">Type
+        3</span>
+    <span class="badge " style="background-color: rgb(122, 106, 245);cursor:pointer" (click)="filterType('Type 4')">Type
+        4</span>
+    <span class="badge " style="background-color: rgb(98, 83, 214);cursor:pointer" (click)="filterType('Type 5')">Type
+        5</span>
+    <hr>
+    <table class="table table-bordered row-border hover" style="width:100%">
+        <thead>
+            <tr>
+                <th style="max-width:5px" class="text-center"><input type="text"  (keyup)="onKey($event)" 
+                    style="width: 111px; zoom: 80%; border-color:#dee2e6; ;" placeholder="Recherche"></th>
+                <ng-container *ngFor="let time of hourColumn">
+                    <th scope="col" class="timed text-center" style="font-size: 10px;">{{time}}</th>
+                </ng-container>
+            </tr>
+        </thead>
+        
+        <tbody >
+            <tr *ngFor="let ress of filteredResources">
+                <td class="text-center" id="{{ress.name}}" #ressRef style="display: text-center" style="font-size: 10px;"><b>{{ress.name}}</b></td>
+                    <th scope="col" colspan="12" [style]="style">
+                        <!-- conditional display -->
+                        <ng-container *ngFor="let ressElement of filteredResources">
+                            <ng-container *ngIf="ressElement.name.includes(ress.name)">
+                                <div class="item">
+                                    <div class="row" style="padding: 0px">
+                                        <div class="grid-container">
+                                            <div class="timeScale"></div>
+                                            <ng-container *ngFor="let event of events">
+                                                <ng-container *ngIf="event.ressName.includes(ressElement.name)">
+                                                    <div
+                                                        [ngStyle]="assignRelativeEventPosition(event.startEvent,event.endEvent,event.type)">
+                                                        {{event.title}}</div>
+                                                </ng-container>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </th>
+            <tr>
+        </tbody>
+    </table>
+    
+</div>

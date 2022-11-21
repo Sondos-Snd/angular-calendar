@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
+  Output,
 } from '@angular/core';
 import {
   startOfDay,
@@ -22,22 +23,22 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
-import { EventColor } from 'calendar-utils';
+// import { EventColor } from 'calendar-utils';
 
-const colors: Record<string, EventColor> = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
+// const colors: Record<string, EventColor> = {
+//   red: {
+//     primary: '#ad2121',
+//     secondary: '#FAE3E3',
+//   },
+//   blue: {
+//     primary: '#1e90ff',
+//     secondary: '#D1E8FF',
+//   },
+//   yellow: {
+//     primary: '#e3bc08',
+//     secondary: '#FDF1BA',
+//   },
+// };
 
 @Component({
   selector: 'mwl-demo-component',
@@ -93,50 +94,20 @@ export class DemoComponent {
   refresh = new Subject<void>();
 
   events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: { ...colors.red },
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-      resource: 'Ress 1',
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: { ...colors.yellow },
-      actions: this.actions,
-      resource: 'Ress 2',
-    },
-    {
-      start: addHours(startOfDay(new Date()), 1),
-      title: 'A draggable and resizable event',
-      color: { ...colors.yellow },
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-      resource: 'Ress 4',
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: { ...colors.blue },
-      allDay: true,
-      resource: 'Ress 3',
-    },
+
   ];
 
   activeDayIsOpen: boolean = true;
+
+  style: any="display:block"
+
+  daystyle: any="display:none"
+
+  @Output() calstyle: any="display:block"
+
+  hide(){
+    this.calstyle="display:none"
+  }
 
   constructor(private modal: NgbModal) {}
 
@@ -184,7 +155,7 @@ export class DemoComponent {
         title: 'New event',
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
-        color: colors.red,
+        color: '#00000',
         draggable: true,
         resizable: {
           beforeStart: true,

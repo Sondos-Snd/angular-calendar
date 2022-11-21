@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +9,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DemoComponent } from './component';
 
 registerLocaleData(localeFr);
+
 
 @NgModule({
   imports: [
@@ -23,5 +24,8 @@ registerLocaleData(localeFr);
   ],
   declarations: [DemoComponent],
   exports: [DemoComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class DemoModule {}

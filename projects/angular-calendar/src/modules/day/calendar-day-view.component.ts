@@ -1,224 +1,114 @@
+import { WeekDay } from '@angular/common';
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  TemplateRef,
+  Component, EventEmitter, Input, Output,
 } from '@angular/core';
-import { CalendarEvent } from 'calendar-utils';
-import { Subject } from 'rxjs';
-import { CalendarEventTimesChangedEvent } from '../common/calendar-event-times-changed-event.interface';
-import { PlacementArray } from 'positioning';
-import { CalendarWeekViewBeforeRenderEvent } from '../week/calendar-week.module';
+import { AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import moment from 'moment';
+import { EventService } from '../../services/event.service';
+import { ResourceService } from '../../services/resource.service';
 
-export type CalendarDayViewBeforeRenderEvent =
-  CalendarWeekViewBeforeRenderEvent;
+import {
+  CalendarEventTimesChangedEvent,
+} from '../common/calendar-event-times-changed-event.interface';
 
-/**
- * Shows all events on a given day. Example usage:
- *
- * ```typescript
- * <mwl-calendar-day-view
- *  [viewDate]="viewDate"
- *  [events]="events">
- * </mwl-calendar-day-view>
- * ```
- */
+export interface CalendarDayViewEventTimesChangedEvent<
+  EventMetaType = any,
+  DayMetaType = any
+> extends CalendarEventTimesChangedEvent<EventMetaType> {
+
+}
+
 @Component({
   selector: 'mwl-calendar-day-view',
-  template: `
-    <mwl-calendar-week-view
-      class="cal-day-view"
-      [daysInWeek]="1"
-      [viewDate]="viewDate"
-      [events]="events"
-      [hourSegments]="hourSegments"
-      [hourDuration]="hourDuration"
-      [hourSegmentHeight]="hourSegmentHeight"
-      [minimumEventHeight]="minimumEventHeight"
-      [dayStartHour]="dayStartHour"
-      [dayStartMinute]="dayStartMinute"
-      [dayEndHour]="dayEndHour"
-      [dayEndMinute]="dayEndMinute"
-      [refresh]="refresh"
-      [locale]="locale"
-      [eventSnapSize]="eventSnapSize"
-      [tooltipPlacement]="tooltipPlacement"
-      [tooltipTemplate]="tooltipTemplate"
-      [tooltipAppendToBody]="tooltipAppendToBody"
-      [tooltipDelay]="tooltipDelay"
-      [hourSegmentTemplate]="hourSegmentTemplate"
-      [eventTemplate]="eventTemplate"
-      [eventTitleTemplate]="eventTitleTemplate"
-      [eventActionsTemplate]="eventActionsTemplate"
-      [snapDraggedEvents]="snapDraggedEvents"
-      [allDayEventsLabelTemplate]="allDayEventsLabelTemplate"
-      [currentTimeMarkerTemplate]="currentTimeMarkerTemplate"
-      [validateEventTimesChanged]="validateEventTimesChanged"
-      (eventClicked)="eventClicked.emit($event)"
-      (hourSegmentClicked)="hourSegmentClicked.emit($event)"
-      (eventTimesChanged)="eventTimesChanged.emit($event)"
-      (beforeViewRender)="beforeViewRender.emit($event)"
-    ></mwl-calendar-week-view>
-  `,
+  templateUrl: './mwl-calendar-day-view.html',
 })
-export class CalendarDayViewComponent {
-  /**
-   * The current view date
-   */
-  @Input() viewDate: Date;
 
-  /**
-   * An array of events to display on view
-   * The schema is available here: https://github.com/mattlewis92/calendar-utils/blob/c51689985f59a271940e30bc4e2c4e1fee3fcb5c/src/calendarUtils.ts#L49-L63
-   */
-  @Input() events: CalendarEvent[] = [];
 
-  /**
-   * The number of segments in an hour. Must divide equally into 60.
-   */
-  @Input() hourSegments: number = 1;
+export class CalendarDayViewComponent implements OnInit {
 
-  /**
-   * The height in pixels of each hour segment
-   */
-  @Input() hourSegmentHeight: number = 30;
+  todayDate=moment().format('D/M/YYYY');
+  events: any[] = [];
+  resources : any[] = [];
+  timeScale: any[];
+  _filterText: string='';
+  filteredResources: any[] = [];
 
-  /**
-   * The duration of each segment group in minutes
-   */
-  @Input() hourDuration: number;
+  colorGrid : any={
+    Type_1:"rgb(232, 180, 69)",
+    Type_2:"rgb(218, 111, 30)",
+    Type_3:"rgb(215, 76, 209)",
+    Type_4:"rgb(122, 106, 245)",
+    Type_5:"rgb(98, 83, 214)",
+  }
 
-  /**
-   * The minimum height in pixels of each event
-   */
-  @Input() minimumEventHeight: number = 30;
 
-  /**
-   * The day start hours in 24 hour time. Must be 0-23
-   */
-  @Input() dayStartHour: number = 0;
+  constructor(private eventService:EventService, private resourceService:ResourceService) { 
+  }
 
-  /**
-   * The day start minutes. Must be 0-59
-   */
-  @Input() dayStartMinute: number = 0;
+  onKey(event) {
+     this._filterText = event.target.value;
+     this.filteredResources=this.filterResources(this._filterText )
+     
+    }
 
-  /**
-   * The day end hours in 24 hour time. Must be 0-23
-   */
-  @Input() dayEndHour: number = 23;
 
-  /**
-   * The day end minutes. Must be 0-59
-   */
-  @Input() dayEndMinute: number = 59;
+  filterResources(filterTerm:string){
 
-  /**
-   * An observable that when emitted on will re-render the current view
-   */
-  @Input() refresh: Subject<any>;
+    if(filterTerm===''){
+      return this.resources
+    }else{
+      return this.resources.filter(data => data.name.includes(filterTerm))
+    }
 
-  /**
-   * The locale used to format dates
-   */
-  @Input() locale: string;
+  }
 
-  /**
-   * The grid size to snap resizing and dragging of events to
-   */
-  @Input() eventSnapSize: number;
+  assignRelativeEventPosition(startEvent:any,endEvent:any,type:any){
+    startEvent=Math.trunc((Number(startEvent.split(' ')[1].split(':')[0])-8)*4+1)
+    endEvent=Math.trunc((Number(endEvent.split(' ')[1].split(':')[0])-8)*4+1)
 
-  /**
-   * The placement of the event tooltip
-   */
-  @Input() tooltipPlacement: PlacementArray = 'auto';
+    return {'grid-column-start': (startEvent),'grid-column-end': (endEvent),'background-color':this.colorGrid[type],'color':'white'}
+  }
 
-  /**
-   * A custom template to use for the event tooltips
-   */
-  @Input() tooltipTemplate: TemplateRef<any>;
+  ngOnInit(): void {
+    this.refetchData(this.todayDate); 
+    
+    this.timeScale = [
+      '8:00',
+      '9:00',
+      '10:00',
+      '11:00',
+      '12:00',
+      '13:00',
+      '14:00',
+      '15:00',
+      '16:00',
+      '17:00',
+      '18:00',
+      '19:00',
+    ];
+  }
 
-  /**
-   * Whether to append tooltips to the body or next to the trigger element
-   */
-  @Input() tooltipAppendToBody: boolean = true;
+  ngOnChanges(){
 
-  /**
-   * The delay in milliseconds before the tooltip should be displayed. If not provided the tooltip
-   * will be displayed immediately.
-   */
-  @Input() tooltipDelay: number | null = null;
+    this.refetchData(this.todayDate);
+  
+  }
 
-  /**
-   * A custom template to use to replace the hour segment
-   */
-  @Input() hourSegmentTemplate: TemplateRef<any>;
+  filterType(type:any){
+    if (type == "Tous"){
+      this.refetchData(this.todayDate);
+    }else{
+      this.refetchData(this.todayDate,type);
+    }   
+  }
 
-  /**
-   * A custom template to use for day view events
-   */
-  @Input() eventTemplate: TemplateRef<any>;
 
-  /**
-   * A custom template to use for event titles
-   */
-  @Input() eventTitleTemplate: TemplateRef<any>;
+  refetchData(selectedDate:any,type?:any){  
+    this.events = this.eventService.getEvents(selectedDate,type);
+    this.resources = this.resourceService.getResources(selectedDate);
+    this.filteredResources= this.resourceService.getResources(selectedDate);
 
-  /**
-   * A custom template to use for event actions
-   */
-  @Input() eventActionsTemplate: TemplateRef<any>;
+  }
 
-  /**
-   * Whether to snap events to a grid when dragging
-   */
-  @Input() snapDraggedEvents: boolean = true;
 
-  /**
-   * A custom template to use for the all day events label text
-   */
-  @Input() allDayEventsLabelTemplate: TemplateRef<any>;
-
-  /**
-   * A custom template to use for the current time marker
-   */
-  @Input() currentTimeMarkerTemplate: TemplateRef<any>;
-
-  /**
-   * Allow you to customise where events can be dragged and resized to.
-   * Return true to allow dragging and resizing to the new location, or false to prevent it
-   */
-  @Input() validateEventTimesChanged: (
-    event: CalendarEventTimesChangedEvent
-  ) => boolean;
-
-  /**
-   * Called when an event title is clicked
-   */
-  @Output() eventClicked = new EventEmitter<{
-    event: CalendarEvent;
-    sourceEvent: MouseEvent | KeyboardEvent;
-  }>();
-
-  /**
-   * Called when an hour segment is clicked
-   */
-  @Output() hourSegmentClicked = new EventEmitter<{
-    date: Date;
-    sourceEvent: MouseEvent;
-  }>();
-
-  /**
-   * Called when an event is resized or dragged and dropped
-   */
-  @Output() eventTimesChanged =
-    new EventEmitter<CalendarEventTimesChangedEvent>();
-
-  /**
-   * An output that will be called before the view is rendered for the current day.
-   * If you add the `cssClass` property to an hour grid segment it will add that class to the hour segment in the template
-   */
-  @Output() beforeViewRender =
-    new EventEmitter<CalendarDayViewBeforeRenderEvent>();
 }

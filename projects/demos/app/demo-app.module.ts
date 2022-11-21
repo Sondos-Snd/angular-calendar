@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,16 +15,18 @@ import { DemoAppComponent } from './demo-app.component';
 import { DemoComponent as DefaultDemoComponent } from './demo-modules/kitchen-sink/component';
 import { DemoModule as DefaultDemoModule } from './demo-modules/kitchen-sink/module';
 import { environment } from '../environments/environment';
-import { FormsModule } from '@angular/forms';
 import { ClipboardModule } from 'ngx-clipboard';
 import { CarbonAdComponent } from './carbon-ad/carbon-ad.component';
+
+
 
 @NgModule({
   declarations: [DemoAppComponent, CarbonAdComponent],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
     NgbNavModule,
     NgbCollapseModule,
     NgbTooltipModule,

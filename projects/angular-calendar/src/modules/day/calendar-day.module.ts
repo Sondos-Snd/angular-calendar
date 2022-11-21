@@ -1,17 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DragAndDropModule } from 'angular-draggable-droppable';
 import { CalendarDayViewComponent } from './calendar-day-view.component';
 import { CalendarCommonModule } from '../common/calendar-common.module';
-import { CalendarWeekModule } from '../week/calendar-week.module';
 
 export {
   CalendarDayViewComponent,
-  CalendarDayViewBeforeRenderEvent,
+  CalendarDayViewEventTimesChangedEvent,
 } from './calendar-day-view.component';
 
+
 @NgModule({
-  imports: [CommonModule, CalendarCommonModule, CalendarWeekModule],
-  declarations: [CalendarDayViewComponent],
-  exports: [CalendarDayViewComponent],
+  imports: [CommonModule, DragAndDropModule, CalendarCommonModule],
+  declarations: [
+    CalendarDayViewComponent,
+  ],
+  exports: [
+    DragAndDropModule,
+    CalendarDayViewComponent,
+  ],
 })
-export class CalendarDayModule {}
+export class CalendarDayModule {
+
+  
+  
+}
